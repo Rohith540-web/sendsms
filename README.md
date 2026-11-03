@@ -34,6 +34,73 @@ Developed by:ROHITH V
 Registeration Number :212224220083
 */
 ```
+# MainActivity.java
+```
+
+package com.example.sendsms;
+
+import android.os.Bundle;
+import android.content.Intent;
+import android.net.Uri;
+import android.widget.Button;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnSendSMS;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnSendSMS = findViewById(R.id.btnSendSMS);
+
+        btnSendSMS.setOnClickListener(v -> {
+
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+
+            intent.setData(Uri.parse("smsto:9876543210"));
+
+            intent.putExtra("sms_body",
+                    "Hello! This is a test message.");
+
+            try {
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(MainActivity.this,
+                        "No SMS application found",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
+
+```
+# activity_main.xml
+```
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMS APPLICATION"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/btnSendSMS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SEND SMS"/>
+
+</LinearLayout>
+```
 
 ## OUTPUT
 
